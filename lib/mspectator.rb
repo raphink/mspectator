@@ -20,12 +20,12 @@ def apply_filters (mc, example, filter)
 end
 
 def check_spec (example, filter, action, values)
-  mc = rpcclient('spec')
-  mc.progress = false
-  mc = apply_filters mc, example, filter
+  @spec_mc ||= rpcclient('spec')
+  @spec_mc.progress = false
+  @spec_mc = apply_filters @spec_mc, example, filter
   passed = []
   failed = []
-  mc.check(:action => action, :values => values).each do |resp|
+  @spec_mc.check(:action => action, :values => values).each do |resp|
     if resp[:data][:passed]
       passed << resp[:sender]
     else
@@ -33,4 +33,12 @@ def check_spec (example, filter, action, values)
     end
   end
   return passed, failed
+end
+
+RSpec.configure do |c|
+  c.before :each do
+    unless @spec_mc.nil?
+      @spec_mc.reset
+    end
+  end
 end
