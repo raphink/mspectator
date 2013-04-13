@@ -68,6 +68,7 @@ A few notes on this:
  * An call on a specific agent (`puppetca`, `nrpe`, etc.) to test if the found nodes actually pass the tests.
 * The `with` method of the `have_service` matcher may look very similar to those of [rspec-puppet](http://rspec-puppet.com), but instead of testing the catalog, they will actually use the Puppet providers to check the system.
 * The tested resources might *not* be managed by Puppet/chef at all. The fact that the system uses Puppet providers to achieve the tests does not require the resources to have been in a Puppet catalog at any time. It is just a practical way of describing these resources.
+* Since `$fqdn` is a declared class in Puppet, you *can* test a single node by using its fqdn as the testing class.
 
 
 
