@@ -30,7 +30,6 @@ The general architecture of the solution will be the following:
      |       +------------------------------------------->  MCollective::RPC::Agent          |
      |                action, *args        |           |                                     |
      |                                     |           |                                     |
-     |                                     |           |                                     |
      +-------------------------------------+           +-------------------------------------+
 
 
@@ -47,7 +46,10 @@ The components required for this architecture are:
 The matchers will allow to test hosts based on filters, using classes and facts. Below is an example:
 
     describe "apache::server" do
+      it { should find_nodes(10).or_less }
+      it { should have_certificate }
       context "when on Debian", :facts => [:operatingsystem => "Debian"] do
+        it { should find_nodes(5).or_more }
         it { should have_service('apache2').with(
           :ensure => 'running',
           :enable => 'true'
@@ -56,5 +58,13 @@ The matchers will allow to test hosts based on filters, using classes and facts.
       end
     end
 
-The `with` method of the matchers may look very similar to those of [rspec-puppet](http://rspec-puppet.com), but instead of testing the catalog, they will actually use the Puppet providers to check the system.
+A few notes on this:
+
+* The `find_nodes` matcher will do a `discover` lookup. There is an example [in my serverspec fork](https://github.com/raphink/serverspec/blob/dev/mcollective_backend/lib/serverspec/matchers/find_nodes.rb) using the [MCollective serverspec backend](https://github.com/raphink/serverspec/blob/dev/mcollective_backend/lib/serverspec/backend/mcollective.rb);
+* The `have_certificate` matcher (and others, such as `be_monitored`, `be_backuped`, etc.) will require at least two MCollective calls:
+ * A `discover` call to find the nodes matching the current filters (classes and facts);
+ * An call on a specific agent (`puppetca`, `nrpe`, etc.) to test if the found nodes actually pass the tests.
+* The `with` method of the `have_service` matcher may look very similar to those of [rspec-puppet](http://rspec-puppet.com), but instead of testing the catalog, they will actually use the Puppet providers to check the system.
+
+
 
