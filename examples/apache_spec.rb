@@ -7,7 +7,7 @@ describe 'apache' do
     :classes => ['apache'],
     :facts => { :operatingsystem => 'Debian' } do
 
-    it { should find_nodes(5) }
+    it { should find_nodes(5).using_agent('spec') }
     it { should have_package('apache2.2-common') }
     it { should_not have_package('httpd') }
   end

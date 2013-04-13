@@ -1,6 +1,7 @@
 RSpec::Matchers.define :find_nodes do |number|
   match do |filter|
-    mc = rpcclient('rpcutil')
+    @agent ||= 'rpcutil'
+    mc = rpcclient(@agent)
     mc.progress = false
     mc = apply_filters mc, example, filter
     @size = mc.discover.size
@@ -23,11 +24,15 @@ RSpec::Matchers.define :find_nodes do |number|
     @compare_msg = ' or more'
   end
 
+  chain :with_agent do |agent|
+    @agent = agent
+  end
+
   failure_message_for_should do |actual|
-    "expected to find #{expected} nodes#{@compare_msg}, but found #{@size} instead."
+    "expected to find #{expected} nodes#{@compare_msg} using agent '#{@agent}', but found #{@size} instead."
   end
 
   failure_message_for_should_not do |actual|
-    "expected not to find #{expected} nodes#{@compare_msg}, but found #{@size} instead."
+    "expected not to find #{expected} nodes#{@compare_msg} using agent '#{@agent}', but found #{@size} instead."
   end
 end
