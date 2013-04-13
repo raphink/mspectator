@@ -1,17 +1,6 @@
 RSpec::Matchers.define :have_package do |package|
   match do |filter|
-    mc = rpcclient('spec')
-    mc.progress = false
-    mc = apply_filters mc, example, filter
-    @passed = []
-    @failed = []
-    mc.check(:action => 'installed', :values => package).each do |resp|
-      if resp[:data][:passed]
-        @passed << resp[:sender]
-      else
-        @failed << resp[:sender]
-      end
-    end
+    @passed, @failed = check_spec(example, filter, 'installed', package)
     @failed.empty?
   end
 
