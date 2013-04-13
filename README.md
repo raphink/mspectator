@@ -48,6 +48,7 @@ The matchers will allow to test hosts based on filters, using classes and facts.
     describe "apache::server" do
       it { should find_nodes(10).or_less }
       it { should have_certificate }
+      it { should pass_puppet_spec }
       context "when on Debian", :facts => [:operatingsystem => "Debian"] do
         it { should find_nodes(5).or_more }
         it { should have_service('apache2').with(
@@ -66,6 +67,7 @@ A few notes on this:
 * The `have_certificate` matcher (and others, such as `be_monitored`, `be_backuped`, etc.) will require at least two MCollective calls:
  * A `discover` call to find the nodes matching the current filters (classes and facts);
  * An call on a specific agent (`puppetca`, `nrpe`, etc.) to test if the found nodes actually pass the tests.
+* The `pass_puppet_spec` matcher would launch the `serverspec` specs deployed with [puppet-spec](https://github.com/camptocamp/puppet-spec), using the [`run` action](https://github.com/camptocamp/puppet-spec#using-the-mcollective-agent) of the `spec` MCollective agent.
 * The `with` method of the `have_service` matcher may look very similar to those of [rspec-puppet](http://rspec-puppet.com), but instead of testing the catalog, they will actually use the Puppet providers to check the system.
 * The tested resources might *not* be managed by Puppet/chef at all. The fact that the system uses Puppet providers to achieve the tests does not require the resources to have been in a Puppet catalog at any time. It is just a practical way of describing these resources.
 * Since `$fqdn` is a declared class in Puppet, you *can* test a single node by using its fqdn as the testing class.
