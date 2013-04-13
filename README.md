@@ -21,9 +21,9 @@ The general architecture of the solution will be the following:
      |                                     |           |                                     |
      |     rspec                           |           |                                     |
      |       +                             |           |                                     |
-     |       | (check_action, *args)       |           |     Serverspec::Backend::Puppet     |
-     |       v                             |           |              or                     |
-     |  MCollective::RPC#rpcclient         |           |      Serverspec::Backend::Exec      |
+     |       | (check_action, *args)       |           |                                     |
+     |       v                             |           |                                     |
+     |  MCollective::RPC#rpcclient         |           |      Serverspec::Backend::Puppet    |
      |       |                             |           |           ^                         |
      |       +                             |           |           | (check_action, *args)   |
      |       |                             |           |           +                         |
