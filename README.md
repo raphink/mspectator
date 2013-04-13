@@ -55,6 +55,8 @@ The matchers will allow to test hosts based on filters, using classes and facts.
           :enable => 'true'
           )
         }
+        it { should have_package('apache2') }
+        it { should have_user('www-data') }
       end
     end
 
@@ -65,6 +67,7 @@ A few notes on this:
  * A `discover` call to find the nodes matching the current filters (classes and facts);
  * An call on a specific agent (`puppetca`, `nrpe`, etc.) to test if the found nodes actually pass the tests.
 * The `with` method of the `have_service` matcher may look very similar to those of [rspec-puppet](http://rspec-puppet.com), but instead of testing the catalog, they will actually use the Puppet providers to check the system.
+* The tested resources might *not* be managed by Puppet/chef at all. The fact that the system uses Puppet providers to achieve the tests does not require the resources to have been in a Puppet catalog at any time. It is just a practical way of describing these resources.
 
 
 
