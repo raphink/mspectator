@@ -28,14 +28,15 @@ RSpec::Matchers.define :have_certificate do
   end
 
   failure_message_for_should do |actual|
-    "expected that all hosts would have a valid certificate, but found hosts without one: #{@failed.join(', ')}"
+    "expected that all hosts would have a valid #{@signed_msg}certificate, but found hosts without one: #{@failed.join(', ')}"
   end
 
   failure_message_for_should_not do |actual|
-    "expected that no hosts would have a valid certificate, but found hosts with one: #{@passed.join(', ')}"
+    "expected that no hosts would have a valid #{@signed_msg}certificate, but found hosts with one: #{@passed.join(', ')}"
   end
 
-  chain :signed do |status|
+  chain :signed do
     @signed = true
+    @signed_msg = 'signed '
   end
 end
