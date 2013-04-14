@@ -35,6 +35,17 @@ def check_spec (example, filter, action, values)
   return passed, failed
 end
 
+def get_fqdn (example, filter)
+  @util_mc ||= rpcclient('rpcutil')
+  @util_mc.progress = false
+  @util_mc = apply_filters @util_mc, example, filter
+  fqdn = []
+  @util_mc.get_fact(:fact => 'fqdn').each do |resp|
+    fqdn << resp[:data][:value]
+  end
+  fqdn
+end
+
 RSpec.configure do |c|
   c.before :each do
     unless @spec_mc.nil?
