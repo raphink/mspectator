@@ -9,7 +9,11 @@ This project provides a way to test your fleet of servers using RSpec and MColle
 
 It is similar to the [serverspec](http://serverspec.org) project, but it uses MCollective instead of SSH as a network facility, and it allows to test more than a host at a time.
 
-## Example
+# Installing
+
+    gem install mspectator
+
+# Example
 
 The matchers allow to test hosts based on filters, using classes and facts. Below is an example:
 
