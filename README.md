@@ -22,7 +22,7 @@ You also need to have MCollective installed, as well as RSpec.
 
 ## Server side
 
-On the service side (the hosts you are testing), you need:
+On the server side (the hosts you are testing), you need:
 
 * MCollective with the [`spec` agent](https://github.com/camptocamp/puppet-spec/tree/master/files/mcollective/agent);
 * [`serverspec`](http://serverspec.org);
