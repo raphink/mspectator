@@ -1,6 +1,6 @@
 RSpec::Matchers.define :pass_puppet_spec do
   match do
-    spec_mc = filtered_mc('spec')
+    spec_mc = filtered_mc('spec', example)
     @passed = []
     @failed = {}
     spec_mc.run.each do |resp|
