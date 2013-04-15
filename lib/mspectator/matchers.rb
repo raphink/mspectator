@@ -1,5 +1,7 @@
 require 'mspectator/matchers/find_nodes'
+require 'mspectator/matchers/have_certificate'
+require 'mspectator/matchers/have_directory'
+require 'mspectator/matchers/have_file'
 require 'mspectator/matchers/have_package'
 require 'mspectator/matchers/have_user'
-require 'mspectator/matchers/have_certificate'
 require 'mspectator/matchers/pass_puppet_spec'
