@@ -8,6 +8,12 @@ module MSpectator
       @subject ||= self.class.top_level_description
     end
 
+    def self.included(group)
+      group.before(:all) do
+        @mc_clients ||= {}
+      end
+    end
+
     def mc_clients
       @mc_clients ||= {}
     end
