@@ -13,7 +13,7 @@ It is similar to the [serverspec](http://serverspec.org) project, but it uses MC
 
 ## Client side
 
-On the client side (where you run `rspec`), you need `mspectator itself`:
+On the client side (where you run `rspec`), you need `mspectator` itself:
 
     gem install mspectator
 
