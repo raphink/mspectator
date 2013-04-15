@@ -8,7 +8,7 @@ describe 'apache' do
   context 'when on Debian',
     :facts => { :operatingsystem => 'Debian' } do
 
-    it { should find_nodes(5).using_agent('spec') }
+    it { should find_nodes(5).with_agent('spec') }
     it { should have_package('apache2.2-common') }
     it { should_not have_package('httpd') }
     it { should have_service('apache2').with(
