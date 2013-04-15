@@ -20,12 +20,11 @@ The matchers allow to test hosts based on filters, using classes and facts. Belo
 
       context "when on Debian", :facts => [:operatingsystem => "Debian"] do
         it { should find_nodes(5).or_more }
-        # Not implemented yet
-        #it { should have_service('apache2').with(
-        #  :ensure => 'running',
-        #  :enable => 'true'
-        #  )
-        #}
+        it { should have_service('apache2').with(
+          :ensure => 'running',
+          :enable => 'true'
+          )
+        }
         it { should have_package('apache2') }
         it { should have_user('www-data') }
       end
