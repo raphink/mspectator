@@ -6,10 +6,8 @@ include ::MCollective::RPC
 def apply_filters (mc, example)
   classes = example.metadata[:classes] || []
   facts = example.metadata[:facts] || {}
-  filter = example.example_group.top_level_description
-  if classes.empty? and facts.empty?
-    mc.compound_filter filter
-  else
+  mc.compound_filter example.example_group.top_level_description
+  unless classes.empty? and facts.empty?
     classes.each do |c|
       mc.class_filter c
     end
