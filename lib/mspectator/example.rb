@@ -30,6 +30,9 @@ module MSpectator
 
     def filtered_mc(agent, example)
       mc = mc_client(agent)
+      # There is no need to reset only before :group currently
+      # so we need to reset before applying filters
+      mc.reset
       apply_filters(mc, example)
     end
 
