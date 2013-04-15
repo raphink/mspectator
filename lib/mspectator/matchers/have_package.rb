@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_package do |package|
-  match do |filter|
-    @passed, @failed = check_spec(example, filter, 'installed', package)
+  match do
+    @passed, @failed = check_spec(example, 'installed', package)
     @failed.empty?
   end
 

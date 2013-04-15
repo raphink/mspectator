@@ -1,9 +1,9 @@
 RSpec::Matchers.define :find_nodes do |number|
-  match do |filter|
+  match do
     @agent ||= 'rpcutil'
     mc = rpcclient(@agent)
     mc.progress = false
-    mc = apply_filters mc, example, filter
+    mc = apply_filters mc, example
     @size = mc.discover.size
     if @compare == :or_less
       @size <= number

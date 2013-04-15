@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_certificate do
-  match do |filter|
-    discovered = get_fqdn(example, filter)
+  match do
+    discovered = get_fqdn(example)
     puppetca_mc = rpcclient('puppetca')
     puppetca_mc.progress = false
     # TODO: use hash for requests and signed

@@ -3,9 +3,10 @@ require 'mspectator/matchers'
 require 'mcollective'
 include ::MCollective::RPC
 
-def apply_filters (mc, example, filter)
+def apply_filters (mc, example)
   classes = example.metadata[:classes] || []
   facts = example.metadata[:facts] || {}
+  filter = example.example_group.top_level_description
   if classes.empty? and facts.empty?
     mc.compound_filter filter
   else
@@ -19,10 +20,10 @@ def apply_filters (mc, example, filter)
   mc
 end
 
-def check_spec (example, filter, action, values)
+def check_spec (example, action, values)
   @spec_mc ||= rpcclient('spec')
   @spec_mc.progress = false
-  @spec_mc = apply_filters @spec_mc, example, filter
+  @spec_mc = apply_filters @spec_mc, example
   passed = []
   failed = []
   @spec_mc.check(:action => action, :values => values).each do |resp|
@@ -35,10 +36,10 @@ def check_spec (example, filter, action, values)
   return passed, failed
 end
 
-def get_fqdn (example, filter)
+def get_fqdn (example)
   @util_mc ||= rpcclient('rpcutil')
   @util_mc.progress = false
-  @util_mc = apply_filters @util_mc, example, filter
+  @util_mc = apply_filters @util_mc, example
   fqdn = []
   @util_mc.get_fact(:fact => 'fqdn').each do |resp|
     fqdn << resp[:data][:value]
