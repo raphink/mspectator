@@ -11,7 +11,22 @@ It is similar to the [serverspec](http://serverspec.org) project, but it uses MC
 
 # Installing
 
+## Client side
+
+On the client side (where you run `rspec`), you need `mspectator itself`:
+
     gem install mspectator
+
+You also need to have MCollective installed, as well as RSpec.
+
+
+## Server side
+
+On the service side (the hosts you are testing), you need:
+
+* MCollective with the [`spec` agent](https://github.com/camptocamp/puppet-spec/tree/master/files/mcollective/agent);
+* [`serverspec`](http://serverspec.org);
+
 
 # Example
 
