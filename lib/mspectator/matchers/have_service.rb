@@ -1,6 +1,9 @@
 RSpec::Matchers.define :have_service do |service|
   match do
     @filters ||= {}
+    # Eventually, stop using serverspec
+    # and use a dedicated Puppet library on the server side
+    # which will allow to pass @filters simply
     if @filters.fetch(:enable, false) == true
       @action = 'enabled'
     elsif @filters.fetch(:ensure, false) == 'running'
