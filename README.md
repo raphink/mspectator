@@ -13,6 +13,8 @@ It is similar to the [serverspec](http://serverspec.org) project, but it uses MC
 
 The matchers allow to test hosts based on filters, using classes and facts. Below is an example:
 
+    require 'mspectator'
+    
     describe "apache::server" do
       it { should find_nodes(10).or_less.with_agent('spec') }
       it { should have_certificate.signed }
