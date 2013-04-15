@@ -17,7 +17,7 @@ On the client side (where you run `rspec`), you need `mspectator` itself:
 
     gem install mspectator
 
-You also need to have MCollective installed, as well as RSpec.
+You also need to have an MCollective client set up, as well as RSpec.
 
 
 ## Server side
