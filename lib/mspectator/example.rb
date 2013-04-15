@@ -5,7 +5,7 @@ module MSpectator
     include MCollective::RPC
 
     def subject
-      self.class.top_level_description
+      @subject ||= self.class.top_level_description
     end
 
     def mc_clients
