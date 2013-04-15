@@ -1,7 +1,6 @@
 RSpec::Matchers.define :pass_puppet_spec do
   match do
-    spec_mc = rpcclient('spec')
-    spec_mc.progress = false
+    spec_mc = mc_client('spec')
     @passed = []
     @failed = {}
     spec_mc.run.each do |resp|

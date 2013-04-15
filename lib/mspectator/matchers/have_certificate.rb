@@ -1,8 +1,7 @@
 RSpec::Matchers.define :have_certificate do
   match do
     discovered = get_fqdn(example)
-    puppetca_mc = rpcclient('puppetca')
-    puppetca_mc.progress = false
+    puppetca_mc = mc_client('puppetca')
     # TODO: use hash for requests and signed
     # so we can tell where a certificate was found
     requests = []
