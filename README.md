@@ -65,7 +65,7 @@ The general architecture of the solution is the following:
      |       +                             |           |                                     |
      |       | (check_action, *args)       |           |                                     |
      |       v                             |           |                                     |
-     |  MCollective::RPC#rpcclient         |           |      Serverspec::Backend::Puppet    |
+     |  MCollective::RPC#rpcclient         |           |         Specinfra::Backend::Exec    |
      |       |                             |           |           ^                         |
      |       +                             |           |           | (check_action, *args)   |
      |       |                             |           |           +                         |
