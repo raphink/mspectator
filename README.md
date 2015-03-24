@@ -1,6 +1,10 @@
 mspectator
 ==========
 
+[![Gem Version](https://img.shields.io/gem/v/mspectator.svg)](https://rubygems.org/gems/mspectator)
+[![Gem Downloads](https://img.shields.io/gem/dt/mspectator.svg)](https://rubygems.org/gems/mspectator)
+[![Gemnasium](https://img.shields.io/gemnasium/raphink/mspectator.svg)](https://gemnasium.com/raphink/mspectator)
+
 Use RSpec and MCollective to test your fleet
 
 # Goal
